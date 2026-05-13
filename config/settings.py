@@ -29,8 +29,8 @@ class ConfiguredChatModelRef:
 def _env_files() -> tuple[Path, ...]:
     """Return env file paths in priority order (later overrides earlier)."""
     files: list[Path] = [
-        Path.home() / ".config" / "free-claude-code" / ".env",
         Path(".env"),
+        Path.home() / ".config" / "free-claude-code" / ".env",
     ]
     if explicit := os.environ.get("FCC_ENV_FILE"):
         files.append(Path(explicit))
@@ -112,6 +112,15 @@ class Settings(BaseSettings):
     # ==================== DeepSeek Config ====================
     deepseek_api_key: str = Field(default="", validation_alias="DEEPSEEK_API_KEY")
 
+    # ==================== Kimi Config ====================
+    kimi_api_key: str = Field(default="", validation_alias="KIMI_API_KEY")
+
+    # ==================== Wafer Config ====================
+    wafer_api_key: str = Field(default="", validation_alias="WAFER_API_KEY")
+
+    # ==================== OpenCode Zen Config ====================
+    opencode_api_key: str = Field(default="", validation_alias="OPENCODE_API_KEY")
+
     # ==================== Messaging Platform Selection ====================
     # Valid: "telegram" | "discord" | "none"
     messaging_platform: str = Field(
@@ -161,6 +170,9 @@ class Settings(BaseSettings):
     open_router_proxy: str = Field(default="", validation_alias="OPENROUTER_PROXY")
     lmstudio_proxy: str = Field(default="", validation_alias="LMSTUDIO_PROXY")
     llamacpp_proxy: str = Field(default="", validation_alias="LLAMACPP_PROXY")
+    kimi_proxy: str = Field(default="", validation_alias="KIMI_PROXY")
+    wafer_proxy: str = Field(default="", validation_alias="WAFER_PROXY")
+    opencode_proxy: str = Field(default="", validation_alias="OPENCODE_PROXY")
 
     # ==================== Provider Rate Limiting ====================
     provider_rate_limit: int = Field(default=40, validation_alias="PROVIDER_RATE_LIMIT")
